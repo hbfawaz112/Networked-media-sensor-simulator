@@ -13,12 +13,16 @@ In our case , the whole project is write in the Netbeans IDE and compiling and r
 
 #### More information for how the sumiluation is work is in the User.pdf in Docs directory
 
+## Tech Used
+ Java programming language with TCP Socket and Remote Method Invocation (RMI) over TCP.
+ <br>
 
 ## Architecture Of The Project
  <img src="https://raw.githubusercontent.com/hbfawaz112/Networked-media-sensors-simulator/main/Docs/s1.PNG" width="60%" height="60%"/>
  <br>
  <img src="https://raw.githubusercontent.com/hbfawaz112/Networked-media-sensors-simulator/main/Docs/s2.PNG" width="60%" height="60%"/>
  <br>
-  
+
+
 ## More Details is on the manual that explains the architecture (dev.pdf in Docs Directory)  
 <hr>

@@ -1,4 +1,4 @@
-# Networked-media-sensors-simulator
+# Networked Media Sensors Simulator
 The purpose of this project is to study the behaviour of a networked multimedia sensors. The objective is to model this kind of network, define protocols for the communication between its elements, and implement a simulation architecture of such a network
 
 ## Run And Execution

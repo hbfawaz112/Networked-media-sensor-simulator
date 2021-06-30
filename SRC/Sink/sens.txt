@@ -1,0 +1,2 @@
+1:0:Temperature:ZoneA:Registred-Ready:30.0
+2:1:Humidity:ZoneB:Pause:80.0

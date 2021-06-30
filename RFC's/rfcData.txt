@@ -1,0 +1,125 @@
+
+June 2021
+
+Preprared for Info408 Project.
+By Hussein B. Fawaz - Fatima Nasralla - Hassan Fawaz
+Reviwed By: Dr. Hussein Wehbe
+
+   Protocol Name : DATA TRANSMITION PROTCOL  DTP [RFC data]
+ 
+*********************************************************************************************************
+
+Table of Contents
+
+1.	Introduction .....................1
+2.	Objectf ..........................2
+3.	Network Protocol .................3
+4.	Principle operations .............4
+5.	Format of exchange data ..........5
+
+
+************************************************************************************************************
+
+**********Introduction  [1]*************************
+
+	This document containe a description or a roadmap relating to the data transmission protocol.
+This roadmap provide a summary of the rfc data transmission [RFC DATA] containing the objectif of this
+ Protocol , his principle oprations , the format of the exchanged data ,ect… .
+
+************************************************************************************************************
+
+
+*****************Objectif :[2]*********************** 
+
+This protocol is used in Networked multimedia sensors simulator.
+It's a host to host protocol.
+The main objectif of this prtocol is to describe and handle all exchanged data and oprations
+ between  a 2 hots  in this simulation
+A host (Interface) called a sensor :  a sensor is is an autonomous element capable 
+of acquiring information , it can capture images . audio , temperature ect... . 
+
+Rather than each application representing a sensor has a mechanisme to capture media , 
+all data will be provided by a server called data server and the sensor obtaine “capture” 
+from this server.
+
+So we need to specify how the work is done between sensors and data sever and
+ describe the format of the data that is exchanged between the server and the sensor
+and organize the data transmission between data server and sensors.
+
+************************************************************************************************************
+
+
+Network protocol :[3]
+Because each of sensor and server are separetly implemented , and each one of them have 
+an IP adress and a prot associated to a  transport layer (TCP [ RFC 793] or UDP [RFC 768] ) 
+in a LAN network. (MultiNetworking) .
+It can be TCP - UDP - RMI , ect...
+In our case we will use TCP [RFC 793].(format data will be describted down below)
+
+************************************************************************************************************
+
+
+Principle Operation: Data collector simulator [4]
+
+On the sensor side : 
+*******************
+After the configuration and supervising operations will be performed remotly by the supervisor server 
+, the sensor ask to open a connection over TCP , between him and the data server ,
+ when the connection is succefully open , each sensor sends regularly, information about
+ its condition and its capabilities:what is the area of the scene it covers,  what is its availability (i.e. the load of work he is doing),
+ what is the request type etc … (the format of these data will be describted down below).
+
+
+On the data server side :
+***********************
+When the server accept the connection of the sensor , a communication start between them ,
+so after the sensor send his conditions and capabilities , the server provides each sensor with its concerned media stream .
+
+   How the operation in the data server done ?
+      When the data server receive the zone name and the request type from a sensor , it start searching in his data set for the weather
+         (temperature , hummudite ) based on the zone name and type(if it's temperature or humidity) , and when he find the specific weather , 
+	 he send it to the sensor.  
+
+
+Then in the sensor side , each sensor start obtaining(capture) the media stream send by the data server based on it’s need.
+ 
+************************************************************************************************************
+
+
+Format of exchanged data [5] : 
+*****************************
+
+ The media in our similuation will be a static data on the data server containe a weather informations for a specfic zone 
+   will be grouped in a set of data  
+0 - Because we need to use the transport layer  protocol and specific the TCP protocol , we need to specify:
+ -the source ip@ and port 
+ -the destination ip@ and port
+
+
+1-	Between sensor and data server  : first request 
+First the capablities and condition sent by sensor to the data server are in simple format (byte code) {simple data type} , 
+  Descriptors :
+  'coverage-zone:ZoneA'
+  'Type_of_capture : Temparture' 
+  protocol_name : For example in our protocole : 'dtp' to know that the current message is done using the Data transmition protocol
+   
+		Example "requested:Temperature:ZoneA"
+
+2-Between Data server and sensor:
+   The server send of a specific weather in required zone to the sensor . The format of this data is : 
+ex: 
+   'Temperature requested : 35',
+   'Type':'Temperature'
+
+
+		Example : "Temperature:ZoneA:35.0"
+
+			 
+  all these data are in simple format (byte code) {for example simple data types}
+
+************************************************************************************************************
+
+
+
+************************************************************************************************************
+

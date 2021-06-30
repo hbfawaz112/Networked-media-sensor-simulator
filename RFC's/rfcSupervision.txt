@@ -1,0 +1,111 @@
+June 2021
+
+Preprared for Info408 Project.
+By Hussein B. Fawaz - Fatima Nasralla - Hassan Fawaz
+Reviwed By: Dr. Hussein Wehbe
+
+   Protocol Name : supervision protocol  SP [RFC Supervision]
+ 
+*********************************************************************************************************
+
+Table of Contents
+
+1.	Introduction .....................1
+2.	Objectf ..........................2
+3.	Network Protocol .................3
+4.	Principle operations .............4
+5.	Format of exchange data ..........5
+
+
+************************************************************************************************************
+
+**********Introduction  [1]*************************
+	
+	This document containe a description or a roadmap relating to the suppervision protocol.
+This roadmap provide a summary of the rfc Supervision[RFC Suppervision] containing the objectif of this
+ Protocol , the type of it's interfaces(hosts),his principle oprations , the format of the exchanged data ,ect… .
+ 
+
+************************************************************************************************************
+
+
+*****************Objectif :[2]*********************** 
+  
+   This protocol is used in Networked multimedia sensors simulator.
+   It's a host-to-host prtocol
+  The main objectif of this prtocol is to describe and handle all exchanged data and oprations
+ between the 2 hosts.
+
+A host called Supervisor : Rather than having to manage, configure and 
+supervise locally and independently each [application simulating a] sensor, these setup, 
+configuration and supervising operations of the various sensors will be performed remotely 
+by a supervisor , and he can additionally add a sensor to the simmulation.
+
+Each sensor communicates with the same supervisor server
+
+************************************************************************************************************
+
+
+	
+****************Network protocol :[3]*****************
+	  
+Because each one of the sensors are separetly implemented , and each one of them have 
+an IP adress and a prot associated to a  transport layer (TCP [ RFC 793] or UDP [RFC 768] ) 
+in a LAN network. (MultiNetworking) .
+It can be TCP - UDP - RMI , ect...
+In our case we will use TCP [RFC 793].(format data will be describted down below)
+TCP Socket  between a sensor and the supervisor.
+************************************************************************************************************
+
+*******************************************************************************************************
+Principle Operation [4]*********
+    
+  ************How the work is done? **********
+  Main role of supervisor btween him and a sensor is help the senor to register
+ 
+1- Registring a new sensor : Every sensor must be first be added and configurate by the supervisor by help him to take his own descriptor
+		1- Id 
+		2- Parentid
+		3- Request type
+		4- Coverage zone
+		5- Stauts   
+
+	Request type: each group sensors can capture a specific data from data server (s1 capture wind speed in zoneA ,s2 capture temperature in zoneB , ect..)
+   	
+2 - Update some parameteres for a specific sensors  (for example : change it's status , pause or ready ) {this happen between the supervisor and the sink}
+
+The sink is a sensor(Main senor , the end user) , their are more operations between to do between him and the supervsor:
+	The supervisor can ask the sink to send him a list of registred sensors.
+	The supervisor told the sink to update the status of a specific sensor(pause or ready(resume)) 
+
+    
+************************************************************************************************************
+
+
+***************Format of exchanged data [5]:*******************************************
+
+The exchanged data between the supervisor and the sensors network : 
+    this data will be transfer btween a new sensot want to register and the supervisor : 
+  "Register Me" : from sensor to supervisor
+  "enter the sensor id:": from supervisor to sensor
+  "ok1"	: from sensor to supervisor
+  "enter the sensor parent id" :from supervisor to sensor
+  "ok2" : from sensor to supervisor
+  "enter the request type " :from supervisor to sensor
+  "ok3":from sensor to supervisor
+  "enter the coverage zone" :from supervisor to sensor
+
+For the format of exchange data between the supervisor and the sink are :
+	when the supervisor want to update : 
+
+			sensorid:pause (ex : 2:pause) => that mean the supervisor ask to update the status of the 
+		sensor id=2 to pause
+ 
+			sensorid:Registred And Ready (ex : Registred And Ready=> that mean the supervisor ask to update the status of the 
+		sensor id=2 to Registred And Ready
+
+
+      
+************************************************************************************************************
+
+

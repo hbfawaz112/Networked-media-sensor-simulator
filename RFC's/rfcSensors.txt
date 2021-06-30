@@ -1,0 +1,112 @@
+June 2021
+
+Preprared for Info408 Project.
+By Hussein B. Fawaz - Fatima Nasralla - Hassan Fawaz
+Reviwed By: Dr. Hussein Wehbe
+
+   Protocol Name : COMMUNICATION PROTOCOL  CP [RFC Sensors]
+ 
+*********************************************************************************************************
+
+Table of Contents
+
+1.	Introduction .....................1
+2.	Objectf ..........................2
+3.	Network Protocol .................3
+4.	Principle operations .............4
+5.	Format of exchange data ..........5
+
+
+************************************************************************************************************
+
+**********Introduction  [1]*************************
+	
+	This document containe a description or a roadmap relating to the communication protocol.
+This roadmap provide a summary of the rfc Sensors [RFC Sensors] containing the objectif of this
+ Protocol , the type of it's interfaces(hosts),his principle oprations , the format of the exchanged data ,ect… .
+ 
+
+************************************************************************************************************
+
+
+*****************Objectif :[2]*********************** 
+  
+   This protocol is used in Networked multimedia sensors simulator.
+  The main objectif of this prtocol is to describe and handle all exchanged data and oprations
+ between  sensors and the sink (sink is a main sensor but he can't capture ,
+ The sink has a specific operations diffrent from the other sensors ) in this simulation.
+
+ A sensor is an autonomous element capable 
+of acquiring information , it can capture images . audio , temperature ect... . 
+ so a sensor it's capable to capture and obtain information such a media 
+	(in our simulation will be a data of a weather (Temperature and humidity))
+ 
+  
+************************************************************************************************************
+
+**************Similation (aricheticture)*******************************
+
+		    
+      
+       Sink    <-- root (requests issuer and responses recipient from the network)
+     /     \
+    SA       SB    <-- High level sensors(capturing and routing)
+   / \     /    \  
+  SA1 SA2 SB1    SB2 <-- Base level sensors(just capturing)
+		.
+	
+****************Network protocol :[3]*****************************************
+	  
+Because each one of the sensor and sink are separetly implemented , and each one of them have 
+an IP adress and a prot associated to a  transport layer in a LAN network. (MultiNetworking) .
+It can be TCP - UDP - RMI , ect...
+In our case we will use RMI over TCP [RFC 793].(format data will be describted down below)
+
+************************************************************************************************************
+
+*******************************************************************************************************
+******Principle Operation [4]*********
+    
+  ***********Sensors Types*************
+ In our simulation we have a multliple types of sensors , devides into 3 types: 
+
+1-A sink sensor , Roles : 
+      A- The main role is to initiates the queries (the data format will be describe down bellow)
+ 	and receives the final resulted data. (requests issuer and responses recipient from the network)
+      B- When a sensor succefully has his own information after the RFC Supervision , he send them to sink 
+	to save this sensor .
+2- The base level sensors : Their main job is simply  send to the data server using the data transmition protocol
+[RFC data] their descriptors , and recieve the media stream based on it's descriptor (Capture Data)
+3- The middle level sensors (higher tiers) : Same job of the base level.
+
+
+  ************How the work is done? **********
+
+   After getting the sensor his descriptor by using the [RFC Supervision] and  getting the result data from 
+data server using [RFC Data] , he send it to the sink and the last one receive this data save them.
+	
+    
+************************************************************************************************************
+
+
+***************Format of exchanged data [5]:********************
+ 
+0 - Because we need to use the transport layer  protocol and specific the TCP protocol , we need to specify:
+ -the source ip@ and port 
+ -the destination ip@ and port
+
+
+	
+1-Between sensor and sink:
+   The seonsor after his capture the data , send the specific weather in required zone to the sink (listed above).
+    The format of this data is : 
+    
+    Message From Sensor To Sink id:parentid:requesttype:coveragezone:Status:Rquireddata
+		ex: Message From Sensor To Sink 1:0:Temperature:ZoneA:Registring...:30.0
+		 		 
+   all these data are in simple format (byte code) {for example simple data types}
+ 
+************************************************************************************************************
+
+
+
